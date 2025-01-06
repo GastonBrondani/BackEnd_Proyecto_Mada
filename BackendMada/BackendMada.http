@@ -1,0 +1,6 @@
+@BackendMada_HostAddress = http://localhost:5230
+
+GET {{BackendMada_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
