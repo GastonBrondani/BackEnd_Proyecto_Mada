@@ -25,12 +25,12 @@ namespace BackendMada.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<proveedor>> GetProveedorPorID(int id)
         {
-            var cliente = await _context.clientes.FindAsync(id);
-            if (cliente == null)
+            var proveedor = await _context.proveedores.FindAsync(id);
+            if (proveedor == null)
             {
                 return NotFound();
             }
-            return await _context.proveedores.FindAsync(id);
+            return proveedor; 
         }
 
         [HttpPost]
