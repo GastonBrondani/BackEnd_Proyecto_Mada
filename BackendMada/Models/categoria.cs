@@ -12,8 +12,11 @@ public partial class categoria
     [Key]
     public int id_categoria { get; set; }
 
-    [StringLength(50)]
+    [Required(ErrorMessage = "El nombre de la categoría es obligatorio")]
+    [StringLength(50, ErrorMessage = "El nombre no puede tener más de 50 caracteres")]
     public string nombre_categoria { get; set; } = null!;
+ 
+  
 
     [InverseProperty("id_categoriaNavigation")]
     public virtual ICollection<producto> productos { get; set; } = new List<producto>();
