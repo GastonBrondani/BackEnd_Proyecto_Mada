@@ -17,6 +17,7 @@ public partial class categoria
     public string nombre_categoria { get; set; } = null!;
  
   
+    
 
     [InverseProperty("id_categoriaNavigation")]
     public virtual ICollection<producto> productos { get; set; } = new List<producto>();
