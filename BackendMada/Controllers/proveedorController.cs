@@ -33,25 +33,40 @@ namespace BackendMada.Controllers
             return proveedor; 
         }
 
+       
         [HttpPost]
         public async Task<ActionResult<proveedor>> PostProveedor(proveedor proveedor)
         {
-                _context.proveedores.Add(proveedor);
-                await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-                return CreatedAtAction(nameof(PostProveedor), new { id = proveedor.id_proveedor }, proveedor);
-            
+            _context.proveedores.Add(proveedor);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(PostProveedor), new { id = proveedor.id_proveedor }, proveedor);
         }
 
+
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProveedor(int id, proveedor proveedor)
         {
-            
-                _context.Entry(proveedor).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                return NoContent();
-            
-        }
+            if (id != proveedor.id_proveedor)
+            {
+                return BadRequest("El ID de la URL no coincide con el del objeto.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Entry(proveedor).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        } 
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<proveedor>> DeleteProveedor(int id)

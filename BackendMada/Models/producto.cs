@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,19 +13,28 @@ public partial class producto
     [Key]
     public int id_producto { get; set; }
 
+    [Required(ErrorMessage = "Debe seleccionar una categoría")]
     public int id_categoria { get; set; }
 
+    [Required(ErrorMessage = "Debe seleccionar un proveedor")]
     public int id_proveedor { get; set; }
 
-    [StringLength(50)]
+    [Required(ErrorMessage = "El nombre del producto es obligatorio")]
+    [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
     public string nombre_producto { get; set; } = null!;
 
+    [Required(ErrorMessage = "El precio de venta es obligatorio")]
+    [Range(1, double.MaxValue, ErrorMessage = "El precio de venta debe ser mayor a cero")]
     [Precision(10, 2)]
     public decimal precio_venta { get; set; }
 
+    [Required(ErrorMessage = "El precio de costo es obligatorio")]
+    [Range(0, double.MaxValue, ErrorMessage = "El precio de costo no puede ser negativo")]
     [Precision(10, 2)]
     public decimal precio_costo { get; set; }
 
+    [Required(ErrorMessage = "El stock es obligatorio")]
+    [Range(0, int.MaxValue, ErrorMessage = "El stock no puede ser negativo")]
     public int stock_producto { get; set; }
 
     [InverseProperty("id_productoNavigation")]

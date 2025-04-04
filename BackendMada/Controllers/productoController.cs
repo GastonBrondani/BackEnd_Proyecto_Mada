@@ -39,23 +39,37 @@ namespace BackendMada.Controllers
         [HttpPost]
         public async Task<ActionResult<producto>> PostProducto(producto producto)
         {
-            
-                _context.productos.Add(producto);
-                await _context.SaveChangesAsync();
-                return CreatedAtAction(nameof(PostProducto), new { id = producto.id_producto }, producto);
-            
-            
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            _context.productos.Add(producto);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(PostProducto), new { id = producto.id_producto }, producto);
+        }
+ 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducto(int id, producto producto)
         {
-            
-                _context.Entry(producto).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                return NoContent();
-            
+            if (id != producto.id_producto)
+            {
+                return BadRequest("El ID no coincide con el objeto enviado.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Entry(producto).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
+
+ 
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<producto>> DeleteProducto(int id)
