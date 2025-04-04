@@ -32,15 +32,19 @@ namespace BackendMada.Controllers
             }
             return await _context.categoria.FindAsync(id);
         }
-        
         [HttpPost]
         public async Task<ActionResult<categoria>> PostCategoria(categoria categoria)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.categoria.Add(categoria);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(PostCategoria), new { id = categoria.id_categoria }, categoria);
         }
-        
+ 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategoria(int id, categoria categoria)
         {
