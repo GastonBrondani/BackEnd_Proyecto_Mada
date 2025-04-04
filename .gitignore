@@ -1,1 +1,42 @@
+# Rider
 .idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# Rider backup
+*.DotSettings.user
+
+# Others
+*.db
+*.db-journal
+*.DS_Store
+*.zip
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET
+project.lock.json
+project.fragment.lock.json
+*.swp
+*.tmp
+
+# System files
+Thumbs.db
+ehthumbs.db
