@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BackendMada")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad6a594c6d2ee4c3c215299ed93b26cda4c70534")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f6986a02cb70cd727ff7d4a367a3309afc09fa5")]
 [assembly: System.Reflection.AssemblyProductAttribute("BackendMada")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BackendMada")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

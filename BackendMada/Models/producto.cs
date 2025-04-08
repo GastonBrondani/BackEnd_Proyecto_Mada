@@ -29,7 +29,7 @@ public partial class producto
     public decimal precio_venta { get; set; }
 
     [Required(ErrorMessage = "El precio de costo es obligatorio")]
-    [Range(0, double.MaxValue, ErrorMessage = "El precio de costo no puede ser negativo")]
+    [Range(1, double.MaxValue, ErrorMessage = "El precio de costo no puede ser negativo")]
     [Precision(10, 2)]
     public decimal precio_costo { get; set; }
 
@@ -42,9 +42,9 @@ public partial class producto
 
     [ForeignKey("id_categoria")]
     [InverseProperty("productos")]
-    public virtual categoria id_categoriaNavigation { get; set; } = null!;
+    public virtual categoria? id_categoriaNavigation { get; set; } 
 
     [ForeignKey("id_proveedor")]
     [InverseProperty("productos")]
-    public virtual proveedor id_proveedorNavigation { get; set; } = null!;
+    public virtual proveedor? id_proveedorNavigation { get; set; } 
 }

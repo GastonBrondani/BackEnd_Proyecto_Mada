@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BackendMada.Models;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
+
 
 namespace BackendMada.Data;
 
