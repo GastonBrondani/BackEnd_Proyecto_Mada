@@ -30,15 +30,20 @@ namespace BackendMada.Controllers
             {
                 return NotFound();
             }
-            return await _context.datalle_venta.FindAsync(id);
+
+            return detalleVenta;
         }
         
         [HttpPost]
         public async Task<ActionResult<datalle_venta>> PostDetalleVenta(datalle_venta detalleVenta)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _context.datalle_venta.Add(detalleVenta);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(PostDetalleVenta), new { id = detalleVenta.id_detalle }, detalleVenta);
+            return CreatedAtAction(nameof(GetDetalleVentas), new { id = detalleVenta.id_detalle }, detalleVenta);
         }
         
         [HttpPut("{id}")]
@@ -46,7 +51,11 @@ namespace BackendMada.Controllers
         {
             if (id != detalleVenta.id_detalle)
             {
-                return BadRequest();
+                return BadRequest("El ID no coincide.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
             _context.Entry(detalleVenta).State = EntityState.Modified;
             await _context.SaveChangesAsync();
