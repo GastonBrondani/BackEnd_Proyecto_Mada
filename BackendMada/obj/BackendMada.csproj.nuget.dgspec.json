@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\facu\\Desktop\\MADAgit\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj": {}
+    "C:\\Users\\gasto\\OneDrive\\Escritorio\\Proyecto mada\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj": {}
   },
   "projects": {
-    "C:\\Users\\facu\\Desktop\\MADAgit\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj": {
+    "C:\\Users\\gasto\\OneDrive\\Escritorio\\Proyecto mada\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\facu\\Desktop\\MADAgit\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj",
+        "projectUniqueName": "C:\\Users\\gasto\\OneDrive\\Escritorio\\Proyecto mada\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj",
         "projectName": "BackendMada",
-        "projectPath": "C:\\Users\\facu\\Desktop\\MADAgit\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj",
-        "packagesPath": "C:\\Users\\facu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\facu\\Desktop\\MADAgit\\BackEnd_Proyecto_Mada\\BackendMada\\obj\\",
+        "projectPath": "C:\\Users\\gasto\\OneDrive\\Escritorio\\Proyecto mada\\BackEnd_Proyecto_Mada\\BackendMada\\BackendMada.csproj",
+        "packagesPath": "C:\\Users\\gasto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gasto\\OneDrive\\Escritorio\\Proyecto mada\\BackEnd_Proyecto_Mada\\BackendMada\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\facu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\gasto\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -97,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
