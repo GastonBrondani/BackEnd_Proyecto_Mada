@@ -32,6 +32,7 @@ namespace BackendMada.Controllers
             }
             return await _context.categoria.FindAsync(id);
         }
+        
         [HttpPost]
         public async Task<ActionResult<categoria>> PostCategoria(categoria categoria)
         {
