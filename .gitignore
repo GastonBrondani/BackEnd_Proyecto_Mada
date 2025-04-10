@@ -1,1 +1,58 @@
+# -------------------------------------
+# Carpetas de compilación y temporales
+# -------------------------------------
+bin/
+obj/
+.vs/
 .idea/
+out/
+TestResults/
+Generated/
+
+# -------------------------------------
+# Archivos temporales y de configuración local
+# -------------------------------------
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.log
+
+# -------------------------------------
+# Archivos binarios y ejecutables
+# -------------------------------------
+*.dll
+*.exe
+*.pdb
+*.cache
+*.mdb
+*.db
+.nuget.
+*.tmp
+*.bak
+
+# -------------------------------------
+# Rider y JetBrains config
+# -------------------------------------
+.idea/
+*.sln.iml
+.rider/
+*.DotSettings.user
+*.dotCover
+
+# -------------------------------------
+# Sistema operativo
+# -------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+*.swp
+
+# -------------------------------------
+# Configuración específica del proyecto Mada
+# -------------------------------------
+BackendMada/bin/
+BackendMada/obj/
