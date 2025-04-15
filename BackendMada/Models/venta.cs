@@ -25,7 +25,9 @@ public partial class venta
 
     [ForeignKey("id_cliente")]
     [InverseProperty("venta")]
-    public virtual cliente? id_clienteNavigation { get; set; } 
+ 
+    public virtual cliente? id_clienteNavigation { get; set; }     
+
 
     [InverseProperty("id_ventaNavigation")]
     public virtual ICollection<datalle_venta> datalle_venta { get; set; } = new List<datalle_venta>();

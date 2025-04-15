@@ -42,7 +42,7 @@ namespace BackendMada.Controllers
             }
             _context.venta.Add(venta);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(PostVenta), new { id = venta.id_venta }, venta);
+            return CreatedAtAction(nameof(GetVentas), new { id = venta.id_venta }, venta);
         }
         
         [HttpPut("{id}")]
