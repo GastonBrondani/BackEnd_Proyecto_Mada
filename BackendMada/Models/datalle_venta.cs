@@ -30,9 +30,9 @@ public partial class datalle_venta
 
     [ForeignKey("id_producto")]
     [InverseProperty("datalle_venta")]
-    public virtual producto id_productoNavigation { get; set; } = null!;
+    public virtual producto? id_productoNavigation { get; set; }
 
     [ForeignKey("id_venta")]
     [InverseProperty("datalle_venta")]
-    public virtual venta id_ventaNavigation { get; set; } = null!;
+    public virtual venta? id_ventaNavigation { get; set; }
 }
