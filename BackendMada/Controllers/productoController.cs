@@ -32,8 +32,6 @@ namespace BackendMada.Controllers
         {
             
                 return await _context.productos.FindAsync(id);
-            
-            
         }
 
         [HttpPost]
