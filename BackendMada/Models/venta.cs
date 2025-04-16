@@ -25,8 +25,10 @@ public partial class venta
 
     [ForeignKey("id_cliente")]
     [InverseProperty("venta")]
+
  
     public virtual cliente? id_clienteNavigation { get; set; }     
+
 
 
     [InverseProperty("id_ventaNavigation")]
