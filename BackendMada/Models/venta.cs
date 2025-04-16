@@ -27,7 +27,7 @@ public partial class venta
     [InverseProperty("venta")]
 
  
-    public virtual cliente? id_clienteNavigation { get; set; }     
+    public virtual cliente? id_clienteNavigation { get; set; } 
 
 
 
