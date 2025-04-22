@@ -9,9 +9,9 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class DetalleVentaController : ControllerBase
     {
-        private readonly myDbContext _context;
+        private readonly MyDbContext _context;
         
-        public DetalleVentaController(myDbContext context)
+        public DetalleVentaController(MyDbContext context)
         {
             _context = context;
         }
