@@ -9,9 +9,9 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ProveedorController : ControllerBase
     {
-        private readonly myDbContext _context;
+        private readonly MyDbContext _context;
 
-        public ProveedorController(myDbContext context)
+        public ProveedorController(MyDbContext context)
         {
             _context = context;
         }

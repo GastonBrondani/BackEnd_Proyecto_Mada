@@ -63,7 +63,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(); // Esta línea registra TODOS los controladores
 
 // Esta configuración del DbContext es para TODA la aplicación
-builder.Services.AddDbContext<myDbContext>(options =>
+builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(10, 4, 32))
