@@ -17,13 +17,13 @@ namespace BackendMada.Controllers
         }
         //vamos a controlar las excepciones en una capa middleware
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<categoria>>> GetCategorias()
+        public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
         {
                 return await _context.categoria.ToListAsync();
         }
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<categoria>> GetCategoriaPorID(int id)
+        public async Task<ActionResult<Categoria>> GetCategoriaPorID(int id)
         {
             var categoria = await _context.categoria.FindAsync(id);
             if (categoria == null)
@@ -34,7 +34,7 @@ namespace BackendMada.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<categoria>> PostCategoria(categoria categoria)
+        public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
         {
             if (!ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace BackendMada.Controllers
         }
  
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoria(int id, categoria categoria)
+        public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
         {
             if (id != categoria.id_categoria)
             {

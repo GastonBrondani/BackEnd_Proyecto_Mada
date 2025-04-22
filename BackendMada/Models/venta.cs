@@ -8,7 +8,7 @@ namespace BackendMada.Models;
 
 [Index("id_cliente", Name = "id_cliente")]
 [MySqlCollation("utf8mb4_general_ci")]
-public partial class venta
+public partial class Venta
 {
     [Key]
     public int id_venta { get; set; }
@@ -24,13 +24,11 @@ public partial class venta
     public DateTime fecha_venta { get; set; }
 
     [ForeignKey("id_cliente")]
-    [InverseProperty("venta")]
-
- 
-    public virtual cliente? id_clienteNavigation { get; set; } 
+    [InverseProperty("venta")] 
 
 
+    public virtual Cliente? id_clienteNavigation { get; set; } 
 
     [InverseProperty("id_ventaNavigation")]
-    public virtual ICollection<datalle_venta> datalle_venta { get; set; } = new List<datalle_venta>();
+    public virtual ICollection<Detalle_venta> datalle_venta { get; set; } = new List<Detalle_venta>();
 }

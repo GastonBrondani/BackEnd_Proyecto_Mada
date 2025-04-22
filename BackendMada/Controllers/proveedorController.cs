@@ -17,13 +17,13 @@ namespace BackendMada.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<proveedor>>> GetProveedores()
+        public async Task<ActionResult<IEnumerable<Proveedor>>> GetProveedores()
         {
             return await _context.proveedores.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<proveedor>> GetProveedorPorID(int id)
+        public async Task<ActionResult<Proveedor>> GetProveedorPorID(int id)
         {
             var proveedor = await _context.proveedores.FindAsync(id);
             if (proveedor == null)
@@ -35,7 +35,7 @@ namespace BackendMada.Controllers
 
        
         [HttpPost]
-        public async Task<ActionResult<proveedor>> PostProveedor(proveedor proveedor)
+        public async Task<ActionResult<Proveedor>> PostProveedor(Proveedor proveedor)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace BackendMada.Controllers
 
        
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProveedor(int id, proveedor proveedor)
+        public async Task<IActionResult> PutProveedor(int id, Proveedor proveedor)
         {
             if (id != proveedor.id_proveedor)
             {
@@ -69,7 +69,7 @@ namespace BackendMada.Controllers
         } 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<proveedor>> DeleteProveedor(int id)
+        public async Task<ActionResult<Proveedor>> DeleteProveedor(int id)
         {
                 _context.proveedores.Remove(await _context.proveedores.FindAsync(id));
                 await _context.SaveChangesAsync();

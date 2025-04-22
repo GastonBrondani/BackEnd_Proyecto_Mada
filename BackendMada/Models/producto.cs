@@ -8,7 +8,7 @@ namespace BackendMada.Models;
 [Index("id_categoria", Name = "id_categoria")]
 [Index("id_proveedor", Name = "id_proveedor")]
 [MySqlCollation("utf8mb4_general_ci")]
-public partial class producto
+public partial class Producto
 {
     [Key]
     public int id_producto { get; set; }
@@ -38,13 +38,13 @@ public partial class producto
     public int stock_producto { get; set; }
 
     [InverseProperty("id_productoNavigation")]
-    public virtual ICollection<datalle_venta> datalle_venta { get; set; } = new List<datalle_venta>();
+    public virtual ICollection<Detalle_venta> datalle_venta { get; set; } = new List<Detalle_venta>();
 
     [ForeignKey("id_categoria")]
     [InverseProperty("productos")]
-    public virtual categoria? id_categoriaNavigation { get; set; } 
+    public virtual Categoria? id_categoriaNavigation { get; set; } 
 
     [ForeignKey("id_proveedor")]
     [InverseProperty("productos")]
-    public virtual proveedor? id_proveedorNavigation { get; set; } 
+    public virtual Proveedor? id_proveedorNavigation { get; set; } 
 }

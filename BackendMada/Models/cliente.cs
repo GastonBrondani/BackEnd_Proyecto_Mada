@@ -8,7 +8,7 @@ namespace BackendMada.Models;
 
 [Table("cliente")]
 [MySqlCollation("utf8mb4_general_ci")]
-public partial class cliente
+public partial class Cliente
 {
     [Key]
     public int id_cliente { get; set; }
@@ -34,5 +34,5 @@ public partial class cliente
     public string telefono { get; set; } = null!;
 
     [InverseProperty("id_clienteNavigation")]
-    public virtual ICollection<venta> venta { get; set; } = new List<venta>();
+    public virtual ICollection<Venta> venta { get; set; } = new List<Venta>();
 }
