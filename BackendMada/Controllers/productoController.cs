@@ -11,9 +11,9 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ProductoController : ControllerBase
     {
-        private readonly myDbContext _context;
+        private readonly MyDbContext _context;
 
-        public ProductoController(myDbContext context)
+        public ProductoController(MyDbContext context)
         {
             _context = context;
         }
