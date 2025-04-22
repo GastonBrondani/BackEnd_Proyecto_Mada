@@ -4,7 +4,9 @@ namespace BackendMada.Utils
 {
     // Clase utilitaria para validar un CUIT: estructura, longitud y dígito verificador
 
+
     public static class ValidadorCUIT
+
 
     {
         // Método que recibe un CUIT como string y devuelve true si es válido, false si no
