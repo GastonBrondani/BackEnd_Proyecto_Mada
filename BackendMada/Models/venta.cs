@@ -24,16 +24,10 @@ public partial class Venta
     public DateTime fecha_venta { get; set; }
 
     [ForeignKey("id_cliente")]
-    [InverseProperty("venta")]
+    [InverseProperty("venta")] 
 
- 
 
     public virtual Cliente? id_clienteNavigation { get; set; } 
-
-    public virtual cliente? id_clienteNavigation { get; set; } 
-
-
-
 
     [InverseProperty("id_ventaNavigation")]
     public virtual ICollection<Detalle_venta> datalle_venta { get; set; } = new List<Detalle_venta>();
