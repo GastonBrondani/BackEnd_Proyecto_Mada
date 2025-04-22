@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BackendMada.Models;
 
 [MySqlCollation("utf8mb4_general_ci")]
-public partial class categoria
+public partial class Categoria
 {
     [Key]
     public int id_categoria { get; set; }
@@ -19,5 +19,5 @@ public partial class categoria
   
 
     [InverseProperty("id_categoriaNavigation")]
-    public virtual ICollection<producto> productos { get; set; } = new List<producto>();
+    public virtual ICollection<Producto> productos { get; set; } = new List<Producto>();
 }

@@ -20,14 +20,14 @@ namespace BackendMada.Controllers
 
         // GET: api/cliente
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
             return await _context.clientes.ToListAsync();
         }
 
         // GET: api/cliente/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<cliente>> GetClientePorID(int id)
+        public async Task<ActionResult<Cliente>> GetClientePorID(int id)
         {
             var cliente = await _context.clientes.FindAsync(id);
             if (cliente == null)
@@ -38,7 +38,7 @@ namespace BackendMada.Controllers
 
         // POST: api/cliente
         [HttpPost]
-        public async Task<ActionResult<cliente>> PostCliente(cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -54,7 +54,7 @@ namespace BackendMada.Controllers
 
         // PUT: api/cliente/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCliente(int id, cliente cliente)
+        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
             if (id != cliente.id_cliente)
                 return BadRequest("El ID de la URL no coincide con el del objeto enviado.");

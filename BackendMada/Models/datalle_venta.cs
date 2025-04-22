@@ -9,7 +9,7 @@ namespace BackendMada.Models;
 [Index("id_producto", Name = "id_producto")]
 [Index("id_venta", Name = "id_venta")]
 [MySqlCollation("utf8mb4_general_ci")]
-public partial class datalle_venta
+public partial class Detalle_venta
 {
     [Key]
     public int id_detalle { get; set; }
@@ -31,10 +31,10 @@ public partial class datalle_venta
     [ForeignKey("id_producto")]
     [InverseProperty("datalle_venta")]
 
-    public virtual producto? id_productoNavigation { get; set; }
+    public virtual Producto? id_productoNavigation { get; set; }
 
     [ForeignKey("id_venta")]
     [InverseProperty("datalle_venta")]
-    public virtual venta? id_ventaNavigation { get; set; }
+    public virtual Venta? id_ventaNavigation { get; set; }
 
 }

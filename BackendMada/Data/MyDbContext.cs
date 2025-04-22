@@ -17,17 +17,17 @@ public partial class MyDbContext : DbContext
     {
     }
 
-    public virtual DbSet<categoria> categoria { get; set; }
+    public virtual DbSet<Categoria> categoria { get; set; }
 
-    public virtual DbSet<cliente> clientes { get; set; }
+    public virtual DbSet<Cliente> clientes { get; set; }
 
-    public virtual DbSet<datalle_venta> datalle_venta { get; set; }
+    public virtual DbSet<Detalle_venta> datalle_venta { get; set; }
 
-    public virtual DbSet<producto> productos { get; set; }
+    public virtual DbSet<Producto> productos { get; set; }
 
-    public virtual DbSet<proveedor> proveedores { get; set; }
+    public virtual DbSet<Proveedor> proveedores { get; set; }
 
-    public virtual DbSet<venta> venta { get; set; }
+    public virtual DbSet<Venta> venta { get; set; }
 
     /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -44,17 +44,17 @@ public partial class MyDbContext : DbContext
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<categoria>(entity =>
+        modelBuilder.Entity<Categoria>(entity =>
         {
             entity.HasKey(e => e.id_categoria).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<cliente>(entity =>
+        modelBuilder.Entity<Cliente>(entity =>
         {
             entity.HasKey(e => e.id_cliente).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<datalle_venta>(entity =>
+        modelBuilder.Entity<Detalle_venta>(entity =>
         {
             entity.HasKey(e => e.id_detalle).HasName("PRIMARY");
 
@@ -67,7 +67,7 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("id_venta");
         });
 
-        modelBuilder.Entity<producto>(entity =>
+        modelBuilder.Entity<Producto>(entity =>
         {
             entity.HasKey(e => e.id_producto).HasName("PRIMARY");
 
@@ -80,12 +80,12 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("id_proveedor");
         });
 
-        modelBuilder.Entity<proveedor>(entity =>
+        modelBuilder.Entity<Proveedor>(entity =>
         {
             entity.HasKey(e => e.id_proveedor).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<venta>(entity =>
+        modelBuilder.Entity<Venta>(entity =>
         {
             entity.HasKey(e => e.id_venta).HasName("PRIMARY");
 

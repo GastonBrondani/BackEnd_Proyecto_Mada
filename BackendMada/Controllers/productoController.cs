@@ -19,7 +19,7 @@ namespace BackendMada.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<producto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
         {
             
                 return await _context.productos.ToListAsync();
@@ -28,14 +28,14 @@ namespace BackendMada.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<producto>> GetProductoPorID(int id)
+        public async Task<ActionResult<Producto>> GetProductoPorID(int id)
         {
             
                 return await _context.productos.FindAsync(id);
         }
 
         [HttpPost]
-        public async Task<ActionResult<producto>> PostProducto(producto producto)
+        public async Task<ActionResult<Producto>> PostProducto(Producto producto)
         {
             if (!ModelState.IsValid)
             {
@@ -49,7 +49,7 @@ namespace BackendMada.Controllers
         }
  
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, producto producto)
+        public async Task<IActionResult> PutProducto(int id, Producto producto)
         {
             if (id != producto.id_producto)
             {
@@ -70,7 +70,7 @@ namespace BackendMada.Controllers
  
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<producto>> DeleteProducto(int id)
+        public async Task<ActionResult<Producto>> DeleteProducto(int id)
         {
             
                 _context.productos.Remove(await _context.productos.FindAsync(id));
