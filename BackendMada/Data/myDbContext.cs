@@ -6,14 +6,16 @@ using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace BackendMada.Data;
 
-public partial class myDbContext : DbContext
+
+public partial class MyDbContext : DbContext
 {
-    public myDbContext()
+    public MyDbContext()
     {
         
     }
 
-    public myDbContext(DbContextOptions<myDbContext> options)
+    public MyDbContext(DbContextOptions<MyDbContext> options)
+
         : base(options)
     {
     }
