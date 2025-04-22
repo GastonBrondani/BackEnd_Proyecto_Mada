@@ -11,9 +11,9 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly myDbContext _context;
 
-        public ClienteController(MyDbContext context)
+        public ClienteController(myDbContext context)
         {
             _context = context;
         }
@@ -43,7 +43,7 @@ namespace BackendMada.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!ValidadorCUIT.EsCuitValido(cliente.cuit_cuil))
+            if (!validadorCUIT.EsCuitValido(cliente.cuit_cuil))
                 return BadRequest("CUIT inválido: formato incorrecto o dígito verificador inválido.");
 
             _context.clientes.Add(cliente);
@@ -62,7 +62,7 @@ namespace BackendMada.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!ValidadorCUIT.EsCuitValido(cliente.cuit_cuil))
+            if (!validadorCUIT.EsCuitValido(cliente.cuit_cuil))
                 return BadRequest("CUIT inválido: formato incorrecto o dígito verificador inválido.");
 
             _context.Entry(cliente).State = EntityState.Modified;
