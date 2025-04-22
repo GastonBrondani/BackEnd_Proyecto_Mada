@@ -27,7 +27,11 @@ public partial class Venta
     [InverseProperty("venta")]
 
  
+
     public virtual Cliente? id_clienteNavigation { get; set; } 
+
+    public virtual cliente? id_clienteNavigation { get; set; } 
+
 
 
 
