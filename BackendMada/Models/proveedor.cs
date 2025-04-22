@@ -8,7 +8,7 @@ namespace BackendMada.Models;
 
 [Table("proveedor")]
 [MySqlCollation("utf8mb4_general_ci")]
-public partial class proveedor
+public partial class Proveedor
 {
     [Key]
     public int id_proveedor { get; set; }
@@ -34,5 +34,5 @@ public partial class proveedor
  
 
     [InverseProperty("id_proveedorNavigation")]
-    public virtual ICollection<producto> productos { get; set; } = new List<producto>();
+    public virtual ICollection<Producto> productos { get; set; } = new List<Producto>();
 }
