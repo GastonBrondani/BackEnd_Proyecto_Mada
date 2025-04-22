@@ -10,6 +10,7 @@ public partial class myDbContext : DbContext
 {
     public myDbContext()
     {
+        
     }
 
     public myDbContext(DbContextOptions<myDbContext> options)
