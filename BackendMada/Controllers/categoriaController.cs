@@ -9,9 +9,9 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class CategoriaController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly myDbContext _context;
         
-        public CategoriaController(MyDbContext context)
+        public CategoriaController(myDbContext context)
         {
             _context = context;
         }
