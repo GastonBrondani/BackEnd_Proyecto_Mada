@@ -1,7 +1,7 @@
-using BackendMada.Data;
+
 using BackendMada.Models;
+using BackendMada.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BackendMada.Controllers
 {
@@ -9,73 +9,69 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ProveedorController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly ProveedorService _proveedorService;
 
-        public ProveedorController(MyDbContext context)
+        public ProveedorController(ProveedorService proveedorService)
         {
-            _context = context;
+            _proveedorService = proveedorService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Proveedor>>> GetProveedores()
         {
-            return await _context.proveedores.ToListAsync();
+            var proveedores = await _proveedorService.ObtenerTodos();
+            return Ok(proveedores);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Proveedor>> GetProveedorPorID(int id)
         {
-            var proveedor = await _context.proveedores.FindAsync(id);
+            var proveedor = await _proveedorService.ObtenerPorId(id);
             if (proveedor == null)
-            {
                 return NotFound();
-            }
-            return proveedor; 
+            return Ok(proveedor);
         }
 
-       
         [HttpPost]
         public async Task<ActionResult<Proveedor>> PostProveedor(Proveedor proveedor)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            _context.proveedores.Add(proveedor);
-            await _context.SaveChangesAsync();
+            if (!_proveedorService.EsCuitValido(proveedor.cuil_proveedor))
+                return BadRequest("CUIT inválido.");
 
-            return CreatedAtAction(nameof(PostProveedor), new { id = proveedor.id_proveedor }, proveedor);
+            if (await _proveedorService.ExisteCuit(proveedor.cuil_proveedor))
+                return BadRequest("El CUIT ya está registrado.");
+
+            var nuevo = await _proveedorService.CrearProveedor(proveedor);
+            return CreatedAtAction(nameof(GetProveedorPorID), new { id = nuevo.id_proveedor }, nuevo);
         }
 
-
-       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProveedor(int id, Proveedor proveedor)
         {
             if (id != proveedor.id_proveedor)
-            {
-                return BadRequest("El ID de la URL no coincide con el del objeto.");
-            }
+                return BadRequest("El ID no coincide.");
 
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            _context.Entry(proveedor).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var actualizado = await _proveedorService.ActualizarProveedor(proveedor);
+            if (!actualizado)
+                return NotFound("Proveedor no encontrado.");
+
             return NoContent();
-        } 
+        }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Proveedor>> DeleteProveedor(int id)
+        public async Task<IActionResult> DeleteProveedor(int id)
         {
-                _context.proveedores.Remove(await _context.proveedores.FindAsync(id));
-                await _context.SaveChangesAsync();
-                return NoContent();
-            
+            var eliminado = await _proveedorService.EliminarProveedor(id);
+            if (!eliminado)
+                return NotFound("Proveedor no encontrado.");
+
+            return NoContent();
         }
     }
 }
-

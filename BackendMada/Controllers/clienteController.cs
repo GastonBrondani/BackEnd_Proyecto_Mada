@@ -1,9 +1,6 @@
-
-using BackendMada.Data;
 using BackendMada.Models;
-using BackendMada.Utils; // ✅ Asegurate de tener este using
+using BackendMada.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BackendMada.Controllers
 {
@@ -11,78 +8,55 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly ClienteService _clienteService;
 
-        public ClienteController(MyDbContext context)
+        public ClienteController(ClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
-        // GET: api/cliente
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes() =>
+            Ok(await _clienteService.ObtenerTodosLosClientes());
+
+        [HttpGet("apellido/{apellido}")]
+        public async Task<ActionResult<IEnumerable<Cliente>>> FiltrarPorApellido(string apellido) =>
+            Ok(await _clienteService.FiltrarPorApellido(apellido));
+
+        [HttpGet("cuit/{cuit}")]
+        public async Task<ActionResult<Cliente>> FiltrarPorCuit(string cuit)
         {
-            return await _context.clientes.ToListAsync();
+            var cliente = await _clienteService.FiltrarPorCuit(cuit);
+            return cliente is null ? NotFound() : Ok(cliente);
         }
 
-        // GET: api/cliente/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetClientePorID(int id)
-        {
-            var cliente = await _context.clientes.FindAsync(id);
-            if (cliente == null)
-                return NotFound();
-
-            return cliente;
-        }
-
-        // POST: api/cliente
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!ValidadorCUIT.EsCuitValido(cliente.cuit_cuil))
-                return BadRequest("CUIT inválido: formato incorrecto o dígito verificador inválido.");
+            var (exitoso, mensaje, nuevo) = await _clienteService.CrearCliente(cliente);
+            if (!exitoso) return BadRequest(mensaje);
 
-            _context.clientes.Add(cliente);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(PostCliente), new { id = cliente.id_cliente }, cliente);
+            return CreatedAtAction(nameof(FiltrarPorCuit), new { cuit = nuevo!.cuit_cuil }, nuevo);
         }
 
-        // PUT: api/cliente/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
-            if (id != cliente.id_cliente)
-                return BadRequest("El ID de la URL no coincide con el del objeto enviado.");
+            if (id != cliente.id_cliente) return BadRequest("El ID no coincide.");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (!ValidadorCUIT.EsCuitValido(cliente.cuit_cuil))
-                return BadRequest("CUIT inválido: formato incorrecto o dígito verificador inválido.");
-
-            _context.Entry(cliente).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            var actualizado = await _clienteService.ActualizarCliente(cliente);
+            return actualizado ? NoContent() : NotFound("Cliente no encontrado.");
         }
 
-        // DELETE: api/cliente/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
-            var cliente = await _context.clientes.FindAsync(id);
-            if (cliente == null)
-                return NotFound();
-
-            _context.clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            var eliminado = await _clienteService.EliminarCliente(id);
+            return eliminado ? NoContent() : NotFound("Cliente no encontrado.");
         }
     }
 }
