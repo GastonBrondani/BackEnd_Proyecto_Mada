@@ -2,6 +2,7 @@
 
 using BackendMada.Data;
 using BackendMada.Models;
+using BackendMada.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,73 +12,72 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ProductoController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly IProductoService _productoService;
 
-        public ProductoController(MyDbContext context)
+        public ProductoController(IProductoService productoService)
         {
-            _context = context;
+            _productoService = productoService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
         {
-            
-                return await _context.productos.ToListAsync();
-            
-            
+            var productos = await _productoService.GetAllAsync();
+            return Ok(productos);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Producto>> GetProductoPorID(int id)
         {
-            
-                return await _context.productos.FindAsync(id);
+            var producto = await _productoService.GetByIdAsync(id);
+            if (producto == null) return NotFound("Producto no encontrado");
+            return Ok(producto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto(Producto producto)
+        public async Task<ActionResult<Producto>> PostProducto([FromBody] Producto producto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.productos.Add(producto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(PostProducto), new { id = producto.id_producto }, producto);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var creado = await _productoService.CreateAsync(producto);
+            return CreatedAtAction(nameof(GetProductoPorID), new { id = creado.id_producto }, creado);
         }
- 
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, Producto producto)
+        public async Task<IActionResult> PutProducto(int id, [FromBody] Producto producto)
         {
-            if (id != producto.id_producto)
-            {
-                return BadRequest("El ID no coincide con el objeto enviado.");
-            }
+            if (id != producto.id_producto) return BadRequest("ID no coincide");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Entry(producto).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var actualizado = await _productoService.UpdateAsync(id, producto);
+            if (!actualizado) return NotFound("Producto no encontrado");
 
             return NoContent();
         }
 
- 
-
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Producto>> DeleteProducto(int id)
+        public async Task<IActionResult> DeleteProducto(int id)
         {
-            
-                _context.productos.Remove(await _context.productos.FindAsync(id));
-                await _context.SaveChangesAsync();
-                return NoContent();
-            
+            var eliminado = await _productoService.DeleteAsync(id);
+            if (!eliminado) return NotFound("Producto no encontrado");
+            return NoContent();
         }
-        
+
+        [HttpGet("stockConProveedor")]
+        public async Task<IActionResult> GetStockConProveedor([FromQuery] string nombreProducto)
+        {
+            try
+            {
+                var resultado = await _productoService.GetStockConProveedor(nombreProducto);
+                return Ok(resultado);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
