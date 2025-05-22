@@ -31,8 +31,9 @@
       <None Remove="DTO's\producto" />
     </ItemGroup>
 
+
     <ItemGroup>
       <Compile Include="DTO's\reportes\VentaPorClienteDTO.cs" />
     </ItemGroup>
 
-</Project>
+
