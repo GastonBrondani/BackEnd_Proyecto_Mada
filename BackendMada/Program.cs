@@ -46,17 +46,8 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 
 using BackendMada.Data;
 using BackendMada.Service;
+using BackendMada.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
-/*var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<MyDbContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql")));
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();*/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,9 +61,13 @@ builder.Services.AddDbContext<MyDbContext>(options =>
         new MySqlServerVersion(new Version(10, 4, 32))
     ));
 // 👉 REGISTRAR EL SERVICIO DE CLIENTE
-builder.Services.AddScoped<ClienteService>(); 
+builder.Services.AddScoped<ClienteService>();
 
 builder.Services.AddScoped<ProveedorService>();
+
+builder.Services.AddScoped<IProductoService, ProductoService>();
+
+
 
 
 // CORS también es una configuración global
