@@ -44,6 +44,9 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 }*/
 
 
+
+
+
 using BackendMada.Data;
 using BackendMada.Service;
 using BackendMada.Service.Interfaces;
@@ -51,60 +54,50 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers(); // Esta línea registra TODOS los controladores
+// 👉 Swagger (habilitado siempre)
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-// Esta configuración del DbContext es para TODA la aplicación
+// 👉 Controladores
+builder.Services.AddControllers();
+
+// 👉 DbContext con MySQL
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(10, 4, 32))
     ));
-// 👉 REGISTRAR EL SERVICIO DE CLIENTE
+
+// 👉 Inyección de dependencias (services)
 builder.Services.AddScoped<ClienteService>();
-
 builder.Services.AddScoped<ProveedorService>();
-
 builder.Services.AddScoped<IProductoService, ProductoService>();
+builder.Services.AddScoped<IReporteService, ReporteService>();
 
-
-
-
-// CORS también es una configuración global
+// 👉 Configuración de CORS global
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
 });
 
 var app = builder.Build();
 
-// Configuración del pipeline de la aplicación
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
+// 👉 Middleware
+app.UseSwagger();
+app.UseSwaggerUI(); // Swagger disponible en /swagger
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
 
-// Esta línea mapea TODOS los controladores automáticamente
-app.MapControllers();
+app.MapControllers(); // 👉 Mapea todos los controladores
 
 app.Run();
-
-
-
-
-
-
-
 
 
 

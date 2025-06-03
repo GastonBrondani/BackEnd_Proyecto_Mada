@@ -29,12 +29,14 @@ public partial class Detalle_venta
     public decimal precio { get; set; }
 
     [ForeignKey("id_producto")]
+    public virtual Producto? producto { get; set; }
     [InverseProperty("datalle_venta")]
 
 
     public virtual Producto? id_productoNavigation { get; set; }
 
     [ForeignKey("id_venta")]
+    public virtual Venta? venta { get; set; }
     [InverseProperty("datalle_venta")]
     public virtual Venta? id_ventaNavigation { get; set; }
 
