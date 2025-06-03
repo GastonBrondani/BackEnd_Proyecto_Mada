@@ -1,11 +1,12 @@
 using BackendMada.Data;
 using BackendMada.Models;
+using BackendMada.Service.Interfaces;
 using BackendMada.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendMada.Service
 {
-    public class ProveedorService
+    public class ProveedorService: iProveedorService
     {
         private readonly MyDbContext _context;
 

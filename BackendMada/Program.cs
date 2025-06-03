@@ -61,11 +61,13 @@ builder.Services.AddDbContext<MyDbContext>(options =>
         new MySqlServerVersion(new Version(10, 4, 32))
     ));
 // 👉 REGISTRAR EL SERVICIO DE CLIENTE
-builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<IClienteService,ClienteService>();
 
-builder.Services.AddScoped<ProveedorService>();
+builder.Services.AddScoped<iProveedorService,ProveedorService>();
 
 builder.Services.AddScoped<IProductoService, ProductoService>();
+
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 
 
 

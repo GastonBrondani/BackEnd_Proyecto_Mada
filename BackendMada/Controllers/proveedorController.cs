@@ -1,6 +1,7 @@
 
 using BackendMada.Models;
 using BackendMada.Service;
+using BackendMada.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendMada.Controllers
@@ -9,7 +10,7 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ProveedorController : ControllerBase
     {
-        private readonly ProveedorService _proveedorService;
+        private readonly iProveedorService _proveedorService;
 
         public ProveedorController(ProveedorService proveedorService)
         {

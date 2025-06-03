@@ -18,7 +18,6 @@ public partial class Proveedor
     public string nombre_proveedor { get; set; } = null!;
 
     [Required(ErrorMessage = "El CUIL es obligatorio")]
-    [RegularExpression(@"^\d{2}-\d{8}-\d{1}$", ErrorMessage = "El CUIL debe tener el formato 00-00000000-0")]
     [StringLength(13)]
     public string cuil_proveedor { get; set; } = null!;
 
@@ -28,7 +27,6 @@ public partial class Proveedor
     public string email_proveedor { get; set; } = null!;
 
     [Required(ErrorMessage = "El teléfono es obligatorio")]
-    [Phone(ErrorMessage = "Formato de teléfono inválido")]
     [StringLength(30)]
     public string telefono_proveedor { get; set; } = null!;
  
