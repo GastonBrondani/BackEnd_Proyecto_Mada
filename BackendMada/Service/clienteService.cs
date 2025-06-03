@@ -1,12 +1,13 @@
 
 using BackendMada.Data;
 using BackendMada.Models;
+using BackendMada.Service.Interfaces;
 using BackendMada.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendMada.Service
 {
-    public class ClienteService
+    public class ClienteService: IClienteService
     {
         private readonly MyDbContext _context;
 

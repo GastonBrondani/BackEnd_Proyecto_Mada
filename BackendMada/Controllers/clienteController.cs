@@ -1,5 +1,6 @@
 using BackendMada.Models;
 using BackendMada.Service;
+using BackendMada.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendMada.Controllers
@@ -8,7 +9,7 @@ namespace BackendMada.Controllers
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
-        private readonly ClienteService _clienteService;
+        private readonly IClienteService _clienteService;
 
         public ClienteController(ClienteService clienteService)
         {
